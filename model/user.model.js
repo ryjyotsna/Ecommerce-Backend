@@ -21,6 +21,10 @@ const userSchema = new Schema({
         type: String,
         trim: true 
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
     address: {
         street: String,
         city: String,

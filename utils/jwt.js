@@ -1,10 +1,26 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
-const generateRegistrationOptToken = (user) => ({mail,otp}) => {
-    return jwt.sign({ 
-        mail, 
-        otp,
-        type:"REGISTER_OTP"
-     }, process.env.OTP_JWT_SECRET, { expiresIn: '5m' });
+export const generateRegistrationOtpToken = ({
+  fullName,
+  email,
+  phoneNumber,
+  otp,
+}) => {
+  return jwt.sign(
+    {
+      fullName,
+      email,
+      phoneNumber,
+      otp,
+      type: "REGISTER_OTP",
+    },
+    process.env.OTP_JWT_SECRET,
+    {
+      expiresIn: "5m",
+    },
+  );
 };
-export { generateRegistrationOptToken };
+
+export const verifyRegistrationOtpToken = (token) => {
+  return jwt.verify(token, process.env.OTP_JWT_SECRET);
+};
