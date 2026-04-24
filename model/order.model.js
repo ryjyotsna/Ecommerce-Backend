@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const orderSchema = new Schema(
-    {
+  {
     cartId: {
       type: Schema.Types.ObjectId,
       ref: "Cart",
@@ -11,8 +11,8 @@ const orderSchema = new Schema(
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "User", 
-        required: true,
+      ref: "User",
+      required: true,
     },
     items: [
       {
@@ -23,9 +23,15 @@ const orderSchema = new Schema(
         },
         quantity: {
           type: Number,
-          price: Number, 
+          required: true,
+          min: 1,
         },
-    },
+        price: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
+      },
     ],
     totalAmount: {
       type: Number,
@@ -41,8 +47,8 @@ const orderSchema = new Schema(
       enum: ["PLACED", "SHIPPED", "DELIVERED", "CANCELLED"],
       default: "PLACED",
     },
-
-    }, { timestamps: true }
+  },
+  { timestamps: true }
 );
 
 export default mongoose.model('Order', orderSchema);

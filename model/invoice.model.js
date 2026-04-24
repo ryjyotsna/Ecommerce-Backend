@@ -8,6 +8,7 @@ const invoiceSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Order",
       required: true,
+      unique: true,
     },
 
     userId: {
@@ -16,14 +17,27 @@ const invoiceSchema = new Schema(
       required: true,
     },
 
+    invoiceNo: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+
     s3Url: {
       type: String,
-      unique: true,
+      trim: true,
     },
 
     s3Key: {
       type: String,
-      unique: true,
+      trim: true,
+    },
+
+    pdfPath: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
     issuedAt: {
